@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Mobiles.Models.Smartphone>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BatteryPower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDualSim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InternalMemoryGB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RamMB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriceRange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BatteryPower)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDualSim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InternalMemoryGB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RamMB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceRange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cpu.GpuName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
