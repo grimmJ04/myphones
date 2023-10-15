@@ -29,7 +29,7 @@ namespace Mobiles.Models
         [Required, DisplayName("Price Range")]
         public Price PriceRange { get; set; }
 
-        [Ignore]
+        [Ignore, Browsable(false)]
         virtual public SmartphoneCpu? Cpu { get; set; }
     }
 }

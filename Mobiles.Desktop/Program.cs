@@ -21,9 +21,7 @@ namespace Mobiles.Desktop
 
         internal static PhonesDbContext GetDbContext()
         {
-            string appConnectionConfig = AppEnv.GetConnectionName();
-            string connectionStringConfig = AppEnv.GetConnectionString(appConnectionConfig);
-            connectionStringConfig = PathUtils.ResolveVirtual(connectionStringConfig);
+            string connectionStringConfig = PathUtils.ResolveVirtual(AppEnv.GetConnectionString());
             string connectionString = $"Data Source={connectionStringConfig};";
             var optionsBuilder = new DbContextOptionsBuilder<PhonesDbContext>().UseSqlite(connectionString);
             return new PhonesDbContext(optionsBuilder.Options);

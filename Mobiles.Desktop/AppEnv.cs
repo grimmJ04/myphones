@@ -12,7 +12,7 @@ namespace Mobiles.Desktop
         public static string GetConnectionName() => ConfigurationManager.AppSettings["Connection"]
                 ?? throw new KeyNotFoundException($"Application setting 'Connection' not found.");
 
-        public static string GetConnectionString(string connection) => ConfigurationManager.ConnectionStrings[connection].ConnectionString
+        public static string GetConnectionString(string? connection = null) => ConfigurationManager.ConnectionStrings[connection ?? GetConnectionName()].ConnectionString
                 ?? throw new KeyNotFoundException($"Connection string '{connection}' not found.");
 
         public void Init()
