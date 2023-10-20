@@ -15,7 +15,8 @@ namespace Mobiles.Desktop.Views.Phones
 
         private async void SaveButton_Click(object sender, EventArgs e)
         {
-            var phone = new Smartphone { CpuId = 10, BatteryPower_mAh = 3000, InternalMemory_GB = 4096, IsDualSim = true, Ram_MB = 4096, PriceRange = Price.HighCost };
+            throw new NotImplementedException();
+            var phone = new Smartphone { };
             await _context.AddAsync(phone);
             await _context.SaveChangesAsync();
         }

@@ -50,10 +50,10 @@ namespace Mobiles.Desktop
             string appConnectionConfig = GetConnectionName();
             switch (appConnectionConfig)
             {
-                case "PhonesMemDbContext":
+                case "PhonesMemDb":
                     InitMemDb(appConnectionConfig);
                     break;
-                case "PhonesDiskDbContext":
+                case "PhonesDiskDb":
                     InitDiskDb(appConnectionConfig);
                     break;
             }

@@ -15,8 +15,9 @@ namespace Mobiles.Desktop.Views.Cpus
 
         private async void SaveButton_Click(object sender, EventArgs e)
         {
-            var phone = new SmartphoneCpu { Name = "best cpu in the whole world", ClockSpeed_MHz = 1500, CoreCount = 6, GpuName = "pepper" };
-            await _context.AddAsync(phone);
+            throw new NotImplementedException();
+            var cpu = new SmartphoneCpu { };
+            await _context.AddAsync(cpu);
             await _context.SaveChangesAsync();
         }
 
