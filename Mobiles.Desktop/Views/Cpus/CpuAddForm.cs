@@ -1,29 +1,43 @@
-﻿using Mobiles.Core.Data;
-using Mobiles.Models;
+﻿using Mobiles.Models;
 
 namespace Mobiles.Desktop.Views.Cpus
 {
     public partial class CpuAddForm : Form
     {
-        private readonly PhonesDbContext _context;
+        private readonly int? EditId;
+        public SmartphoneCpu? Cpu { get; private set; }
 
-        public CpuAddForm(PhonesDbContext context)
+        public CpuAddForm(SmartphoneCpu? cpu = null)
         {
-            _context = context;
+            EditId = cpu?.Id;
             InitializeComponent();
+            if (cpu != null)
+            {
+                InitEditMode(cpu);
+            }
         }
 
-        private async void SaveButton_Click(object sender, EventArgs e)
+        private void InitEditMode(SmartphoneCpu cpu)
         {
-            throw new NotImplementedException();
-            var cpu = new SmartphoneCpu { };
-            await _context.AddAsync(cpu);
-            await _context.SaveChangesAsync();
+            Text = $"Editing cpu with id: {cpu.Id}";
+            TitleLabel.Text = "Edit Cpu";
+            NameTextBox.Text = cpu.Name;
+            CoreCountNumericUpDown.Value = cpu.CoreCount;
+            ClockSpeedNumericUpDown.Value = cpu.ClockSpeed_MHz;
+            GpuNameTextBox.Text = cpu.GpuName;
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
-
+            var cpu = new SmartphoneCpu
+            {
+                Id = EditId ?? 0,
+                Name = NameTextBox.Text,
+                CoreCount = Convert.ToInt32(CoreCountNumericUpDown.Value),
+                ClockSpeed_MHz = Convert.ToInt32(ClockSpeedNumericUpDown.Value),
+                GpuName = GpuNameTextBox.Text
+            };
+            Cpu = cpu;
         }
     }
 }

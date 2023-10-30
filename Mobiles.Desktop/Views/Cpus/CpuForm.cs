@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mobiles.Core.Data;
+using Mobiles.Core.Utils;
+using Mobiles.Models;
 
 namespace Mobiles.Desktop.Views.Cpus
 {
@@ -26,12 +28,28 @@ namespace Mobiles.Desktop.Views.Cpus
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            using CpuAddForm form = new(_context);
-            form.ShowDialog();
+            using CpuAddForm form = new();
+            var dialogResult = form.ShowDialog();
+            if (dialogResult == DialogResult.OK && form.Cpu != null)
+            {
+                _context.Add(form.Cpu);
+            }
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
+            if (CpuDataGridView.CurrentRow.DataBoundItem is not SmartphoneCpu item)
+            {
+                MessageBox.Show("Select a row to edit first!", "Empty selection", MessageBoxButtons.OK);
+                return;
+            }
+            using CpuAddForm form = new(item);
+            var dialogResult = form.ShowDialog();
+            if (dialogResult == DialogResult.OK && form.Cpu != null)
+            {
+                _context.Upsert(form.Cpu);
+                _context.SaveChanges();
+            }
         }
     }
 }
