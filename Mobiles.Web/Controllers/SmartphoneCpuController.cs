@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mobiles.Core.Data;
-using Mobiles.Models;
+using Mobiles.Core.Models;
 
 namespace Mobiles.Web.Controllers
 {
@@ -51,7 +51,7 @@ namespace Mobiles.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,CoreCount,ClockSpeedMHz,GpuName")] SmartphoneCpu smartphoneCpu)
+        public async Task<IActionResult> Create([Bind("Id,Name,CoreCount,ClockSpeed_MHz,GpuName")] SmartphoneCpu smartphoneCpu)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace Mobiles.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CoreCount,ClockSpeedMHz,GpuName")] SmartphoneCpu smartphoneCpu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CoreCount,ClockSpeed_MHz,GpuName")] SmartphoneCpu smartphoneCpu)
         {
             if (id != smartphoneCpu.Id)
             {

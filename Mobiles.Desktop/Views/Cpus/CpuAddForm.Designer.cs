@@ -51,7 +51,7 @@
             // 
             CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             CancelButton.DialogResult = DialogResult.Cancel;
-            CancelButton.Location = new Point(3, 59);
+            CancelButton.Location = new Point(3, 91);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(75, 23);
             CancelButton.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             SaveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             SaveButton.DialogResult = DialogResult.OK;
-            SaveButton.Location = new Point(266, 59);
+            SaveButton.Location = new Point(266, 91);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(78, 23);
             SaveButton.TabIndex = 0;
@@ -98,7 +98,7 @@
             TableLayoutPanel.RowStyles.Add(new RowStyle());
             TableLayoutPanel.RowStyles.Add(new RowStyle());
             TableLayoutPanel.RowStyles.Add(new RowStyle());
-            TableLayoutPanel.Size = new Size(353, 312);
+            TableLayoutPanel.Size = new Size(353, 344);
             TableLayoutPanel.TabIndex = 2;
             // 
             // TitleLabel
@@ -191,22 +191,22 @@
             // 
             ButtonsTableLayoutPanel.ColumnCount = 2;
             ButtonsTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            ButtonsTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 174F));
-            ButtonsTableLayoutPanel.Controls.Add(SaveButton, 1, 0);
+            ButtonsTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             ButtonsTableLayoutPanel.Controls.Add(CancelButton, 0, 0);
+            ButtonsTableLayoutPanel.Controls.Add(SaveButton, 1, 0);
             ButtonsTableLayoutPanel.Dock = DockStyle.Fill;
             ButtonsTableLayoutPanel.Location = new Point(3, 224);
             ButtonsTableLayoutPanel.Name = "ButtonsTableLayoutPanel";
             ButtonsTableLayoutPanel.RowCount = 1;
             ButtonsTableLayoutPanel.RowStyles.Add(new RowStyle());
-            ButtonsTableLayoutPanel.Size = new Size(347, 85);
+            ButtonsTableLayoutPanel.Size = new Size(347, 50);
             ButtonsTableLayoutPanel.TabIndex = 2;
             // 
             // CpuAddForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(377, 336);
+            ClientSize = new Size(377, 368);
             Controls.Add(TableLayoutPanel);
             Name = "CpuAddForm";
             Text = "CpuAddForm";

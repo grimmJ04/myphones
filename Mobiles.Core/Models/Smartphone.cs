@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Mobiles.Models
+namespace Mobiles.Core.Models
 {
     [Table("smartphone")]
     public class Smartphone

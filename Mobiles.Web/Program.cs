@@ -1,7 +1,8 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Mobiles.Core.Data;
-using Mobiles.Models;
+using Mobiles.Core.Utils;
+using System.Diagnostics;
 
 SqliteConnection? keepAliveConnection = null;
 var builder = WebApplication.CreateBuilder(args);
@@ -10,17 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PhonesDbContext>((options) =>
 {
-    string appConnectionConfig = builder.Configuration.GetSection("AppSettings").GetValue<string>("Connection")
-        ?? throw new KeyNotFoundException($"Application setting 'Connection' not found.");
-    string connectionStringConfig = builder.Configuration.GetConnectionString(appConnectionConfig)
-        ?? throw new KeyNotFoundException($"Connection string '{appConnectionConfig}' not found.");
+    string connectionStringConfig = GetConnectionString(GetConnectionName());
+    connectionStringConfig = PathUtils.ResolveVirtual(connectionStringConfig);
     string connectionString = $"Data Source={connectionStringConfig};";
     options.UseSqlite(connectionString);
-    if (appConnectionConfig == "PhonesMemDbContext")
-    {
-        keepAliveConnection = new(connectionString);
-        keepAliveConnection.Open();
-    }
 });
 
 var app = builder.Build();
@@ -46,23 +40,56 @@ app.MapControllerRoute(
 
 try
 {
-    using var serviceScope = app.Services.CreateScope();
-    var services = serviceScope.ServiceProvider;
-    PhonesDbContext db = services.GetRequiredService<PhonesDbContext>();
-
-    bool created = db.Database.EnsureCreated();
-    SmartphoneCpu[] cpus = new SmartphoneCpu[]
-    {
-        new SmartphoneCpu { Name = "best cpu in the whole world", ClockSpeedMHz = 1500, CoreCount = 6, GpuName = "pepper" },
-        new SmartphoneCpu { Name = "salt", ClockSpeedMHz = 512, CoreCount = 2, GpuName = "chili" },
-        new SmartphoneCpu { Name = "yessir", ClockSpeedMHz = 2338, CoreCount = 8, GpuName = "mint" },
-    };
-    db.SmartphoneCpus.AddRange(cpus);
-    db.SaveChanges();
-
+    InitDb();
     app.Run();
 }
 finally
 {
     keepAliveConnection?.Dispose();
+}
+
+string GetConnectionName() => builder?.Configuration.GetSection("AppSettings").GetValue<string>("Connection")
+        ?? throw new KeyNotFoundException($"Application setting 'Connection' not found.");
+
+string GetConnectionString(string? connection = null) => builder?.Configuration.GetConnectionString(GetConnectionName())
+        ?? throw new KeyNotFoundException($"Connection string '{connection}' not found.");
+
+void InitMemDb(string appConnectionConfig)
+{
+    string connectionStringConfig = GetConnectionString(appConnectionConfig);
+    connectionStringConfig = PathUtils.ResolveVirtual(connectionStringConfig);
+    string connectionString = $"Data Source={connectionStringConfig};";
+    keepAliveConnection = new(connectionString);
+    keepAliveConnection.Open();
+}
+
+void InitDiskDb(string appConnectionConfig)
+{
+    string connectionStringConfig = GetConnectionString(appConnectionConfig);
+    connectionStringConfig = PathUtils.ResolveVirtual(connectionStringConfig);
+    string? dirname = Directory.GetParent(connectionStringConfig)?.FullName;
+    if (dirname != null && !Directory.Exists(dirname))
+    {
+        Directory.CreateDirectory(dirname);
+    }
+}
+
+void InitDb()
+{
+    string appConnectionConfig = GetConnectionName();
+    switch (appConnectionConfig)
+    {
+        case "PhonesMemDb":
+            InitMemDb(appConnectionConfig);
+            break;
+        case "PhonesDiskDb":
+            InitDiskDb(appConnectionConfig);
+            break;
+    }
+    Debug.Assert(app != null);
+    using var serviceScope = app.Services.CreateScope();
+    var services = serviceScope.ServiceProvider;
+    var context = services.GetRequiredService<PhonesDbContext>();
+    bool created = context.Database.EnsureCreated();
+    Debug.WriteLine(created ? "Initialized database." : "Using existing database.");
 }

@@ -1,7 +1,9 @@
-﻿@model Mobiles.Models.Smartphone
+﻿@using Mobiles.Core.Models;
+@model Mobiles.Core.Models.Smartphone
 
 @{
     ViewData["Title"] = "Create";
+    var CpuCollection = ViewData["CpuId"] as SelectList; 
 }
 
 <h1>Create</h1>
@@ -13,9 +15,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BatteryPower" class="control-label"></label>
-                <input asp-for="BatteryPower" class="form-control" />
-                <span asp-validation-for="BatteryPower" class="text-danger"></span>
+                <label asp-for="BatteryPower_mAh" class="control-label"></label>
+                <input asp-for="BatteryPower_mAh" class="form-control" />
+                <span asp-validation-for="BatteryPower_mAh" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -23,19 +25,28 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="InternalMemoryGB" class="control-label"></label>
-                <input asp-for="InternalMemoryGB" class="form-control" />
-                <span asp-validation-for="InternalMemoryGB" class="text-danger"></span>
+                <label asp-for="InternalMemory_GB" class="control-label"></label>
+                <input asp-for="InternalMemory_GB" class="form-control" />
+                <span asp-validation-for="InternalMemory_GB" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RamMB" class="control-label"></label>
-                <input asp-for="RamMB" class="form-control" />
-                <span asp-validation-for="RamMB" class="text-danger"></span>
+                <label asp-for="Ram_MB" class="control-label"></label>
+                <input asp-for="Ram_MB" class="form-control" />
+                <span asp-validation-for="Ram_MB" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PriceRange" class="control-label"></label>
-                <select asp-for="PriceRange" class="form-control"></select>
+                <select asp-for="PriceRange" class="form-control" asp-items="Html.GetEnumSelectList<Price>()">
+                    <option>Select ...</option>
+                </select>
                 <span asp-validation-for="PriceRange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CpuId" class="control-label">Cpu</label>
+                <select asp-for="CpuId" class="form-control" asp-items="CpuCollection">
+                    <option>Select ...</option>
+                </select>
+                <span asp-validation-for="CpuId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

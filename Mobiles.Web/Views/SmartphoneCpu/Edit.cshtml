@@ -1,4 +1,4 @@
-﻿@model Mobiles.Models.SmartphoneCpu
+﻿@model Mobiles.Core.Models.SmartphoneCpu
 
 @{
     ViewData["Title"] = "Edit";
@@ -24,9 +24,9 @@
                 <span asp-validation-for="CoreCount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClockSpeedMHz" class="control-label"></label>
-                <input asp-for="ClockSpeedMHz" class="form-control" />
-                <span asp-validation-for="ClockSpeedMHz" class="text-danger"></span>
+                <label asp-for="ClockSpeed_MHz" class="control-label"></label>
+                <input asp-for="ClockSpeed_MHz" class="form-control" />
+                <span asp-validation-for="ClockSpeed_MHz" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GpuName" class="control-label"></label>

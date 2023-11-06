@@ -28,28 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            PhonesDataGridView = new DataGridView();
+            PhoneDataGridView = new DataGridView();
             AddButton = new Button();
             TableLayoutPanel = new TableLayoutPanel();
             EditButton = new Button();
             ControlPanel = new Panel();
-            ((System.ComponentModel.ISupportInitialize)PhonesDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PhoneDataGridView).BeginInit();
             TableLayoutPanel.SuspendLayout();
             ControlPanel.SuspendLayout();
             SuspendLayout();
             // 
             // PhonesDataGridView
             // 
-            PhonesDataGridView.AllowUserToAddRows = false;
-            PhonesDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            PhonesDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            PhonesDataGridView.Dock = DockStyle.Fill;
-            PhonesDataGridView.Location = new Point(3, 3);
-            PhonesDataGridView.Name = "PhonesDataGridView";
-            PhonesDataGridView.ReadOnly = true;
-            PhonesDataGridView.RowTemplate.Height = 25;
-            PhonesDataGridView.Size = new Size(794, 413);
-            PhonesDataGridView.TabIndex = 0;
+            PhoneDataGridView.AllowUserToAddRows = false;
+            PhoneDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            PhoneDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            PhoneDataGridView.Dock = DockStyle.Fill;
+            PhoneDataGridView.Location = new Point(3, 3);
+            PhoneDataGridView.Name = "PhonesDataGridView";
+            PhoneDataGridView.ReadOnly = true;
+            PhoneDataGridView.RowTemplate.Height = 25;
+            PhoneDataGridView.Size = new Size(794, 413);
+            PhoneDataGridView.TabIndex = 0;
             // 
             // AddButton
             // 
@@ -66,7 +66,7 @@
             // 
             TableLayoutPanel.ColumnCount = 1;
             TableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            TableLayoutPanel.Controls.Add(PhonesDataGridView, 0, 0);
+            TableLayoutPanel.Controls.Add(PhoneDataGridView, 0, 0);
             TableLayoutPanel.Controls.Add(ControlPanel, 0, 1);
             TableLayoutPanel.Dock = DockStyle.Fill;
             TableLayoutPanel.Location = new Point(0, 0);
@@ -107,7 +107,7 @@
             Controls.Add(TableLayoutPanel);
             Name = "PhoneForm";
             Text = "PhoneReadForm";
-            ((System.ComponentModel.ISupportInitialize)PhonesDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PhoneDataGridView).EndInit();
             TableLayoutPanel.ResumeLayout(false);
             ControlPanel.ResumeLayout(false);
             ResumeLayout(false);
@@ -115,7 +115,7 @@
 
         #endregion
 
-        private DataGridView PhonesDataGridView;
+        private DataGridView PhoneDataGridView;
         private Button AddButton;
         private TableLayoutPanel TableLayoutPanel;
         private Panel ControlPanel;

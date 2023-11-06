@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Mobiles.Core.Data;
-using Mobiles.Models;
+using Mobiles.Core.Models;
 
 namespace Mobiles.Web.Controllers
 {
@@ -44,7 +44,7 @@ namespace Mobiles.Web.Controllers
         // GET: Smartphone/Create
         public IActionResult Create()
         {
-            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", "GpuName");
+            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null);
             return View();
         }
 
@@ -53,7 +53,7 @@ namespace Mobiles.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BatteryPower,IsDualSim,InternalMemoryGB,RamMB,PriceRange")] Smartphone smartphone)
+        public async Task<IActionResult> Create([Bind("Id,BatteryPower_mAh,IsDualSim,InternalMemory_GB,Ram_MB,PriceRange,CpuId")] Smartphone smartphone)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace Mobiles.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", "GpuName", smartphone.CpuId);
+            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null, smartphone.CpuId);
             return View(smartphone);
         }
 
@@ -78,7 +78,7 @@ namespace Mobiles.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", "GpuName", smartphone.CpuId);
+            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null, smartphone.CpuId);
             return View(smartphone);
         }
 
@@ -87,7 +87,7 @@ namespace Mobiles.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BatteryPower,IsDualSim,InternalMemoryGB,RamMB,PriceRange")] Smartphone smartphone)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BatteryPower_mAh,IsDualSim,InternalMemory_GB,Ram_MB,PriceRange,CpuId")] Smartphone smartphone)
         {
             if (id != smartphone.Id)
             {
@@ -114,7 +114,7 @@ namespace Mobiles.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", "GpuName", smartphone.CpuId);
+            ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null, smartphone.CpuId);
             return View(smartphone);
         }
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Mobiles.Models;
+using Mobiles.Core.Models;
 
 namespace Mobiles.Core.Data
 {
@@ -23,6 +23,7 @@ namespace Mobiles.Core.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlite();
             base.OnConfiguring(optionsBuilder);
         }
     }

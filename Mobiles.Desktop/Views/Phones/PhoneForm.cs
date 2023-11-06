@@ -15,7 +15,7 @@ namespace Mobiles.Desktop.Views.Phones
 
             _context.Smartphones.LoadAsync();
             _bindingSource.DataSource = _context.Smartphones.Local.ToBindingList();
-            PhonesDataGridView.DataSource = _bindingSource;
+            PhoneDataGridView.DataSource = _bindingSource;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -26,12 +26,30 @@ namespace Mobiles.Desktop.Views.Phones
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            using PhoneAddForm form = new(_context);
-            form.ShowDialog();
+            using PhoneAddForm form = new();
+            var dialogResult = form.ShowDialog();
+            if (dialogResult == DialogResult.OK && form.Phone != null)
+            {
+                _context.Add(form.Phone);
+                _context.SaveChangesAsync();
+            }
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
+            if (PhoneDataGridView.CurrentRow.DataBoundItem is not Smartphone item)
+            {
+                MessageBox.Show("Select a row to edit first!", "Empty selection", MessageBoxButtons.OK);
+                return;
+            }
+            using PhoneAddForm form = new(item);
+            var dialogResult = form.ShowDialog();
+            if (dialogResult == DialogResult.OK && form.Phone != null && _context.Smartphones.Find(item.Id) is Smartphone dbItem)
+            {
+                _context.Smartphones.Entry(dbItem).CurrentValues.SetValues(form.Phone);
+                _context.SaveChangesAsync();
+                _bindingSource.ResetBindings(false);
+            }
         }
     }
 }

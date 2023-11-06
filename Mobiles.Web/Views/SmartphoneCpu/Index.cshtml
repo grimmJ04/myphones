@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mobiles.Models.SmartphoneCpu>
+﻿@model IEnumerable<Mobiles.Core.Models.SmartphoneCpu>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.CoreCount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ClockSpeedMHz)
+                @Html.DisplayNameFor(model => model.ClockSpeed_MHz)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.GpuName)
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.CoreCount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClockSpeedMHz)
+                @Html.DisplayFor(modelItem => item.ClockSpeed_MHz)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GpuName)

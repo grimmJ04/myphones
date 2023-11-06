@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mobiles.Models.Smartphone>
+﻿@model IEnumerable<Mobiles.Core.Models.Smartphone>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BatteryPower)
+                @Html.DisplayNameFor(model => model.BatteryPower_mAh)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsDualSim)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InternalMemoryGB)
+                @Html.DisplayNameFor(model => model.InternalMemory_GB)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RamMB)
+                @Html.DisplayNameFor(model => model.Ram_MB)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PriceRange)
@@ -37,16 +37,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.BatteryPower)
+                @Html.DisplayFor(modelItem => item.BatteryPower_mAh)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsDualSim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InternalMemoryGB)
+                @Html.DisplayFor(modelItem => item.InternalMemory_GB)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RamMB)
+                @Html.DisplayFor(modelItem => item.Ram_MB)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PriceRange)

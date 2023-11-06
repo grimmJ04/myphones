@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mobiles.Core.Data;
-using Mobiles.Core.Utils;
-using Mobiles.Models;
 
 namespace Mobiles.Desktop.Views.Cpus
 {
@@ -33,6 +31,7 @@ namespace Mobiles.Desktop.Views.Cpus
             if (dialogResult == DialogResult.OK && form.Cpu != null)
             {
                 _context.Add(form.Cpu);
+                _context.SaveChangesAsync();
             }
         }
 
@@ -45,10 +44,11 @@ namespace Mobiles.Desktop.Views.Cpus
             }
             using CpuAddForm form = new(item);
             var dialogResult = form.ShowDialog();
-            if (dialogResult == DialogResult.OK && form.Cpu != null)
+            if (dialogResult == DialogResult.OK && form.Cpu != null && _context.SmartphoneCpus.Find(item.Id) is SmartphoneCpu dbItem)
             {
-                _context.Upsert(form.Cpu);
-                _context.SaveChanges();
+                _context.SmartphoneCpus.Entry(dbItem).CurrentValues.SetValues(form.Cpu);
+                _context.SaveChangesAsync();
+                _bindingSource.ResetBindings(false);
             }
         }
     }

@@ -2,7 +2,6 @@ using Mobiles.Core.Data;
 using Mobiles.Core.Utils;
 using Mobiles.Desktop.Views.Cpus;
 using Mobiles.Desktop.Views.Phones;
-using Mobiles.Models;
 
 namespace Mobiles.Desktop.Views
 {

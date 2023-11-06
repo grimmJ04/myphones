@@ -1,6 +1,4 @@
-﻿using Mobiles.Models;
-
-namespace Mobiles.Desktop.Views.Cpus
+﻿namespace Mobiles.Desktop.Views.Cpus
 {
     public partial class CpuAddForm : Form
     {
@@ -20,7 +18,7 @@ namespace Mobiles.Desktop.Views.Cpus
         private void InitEditMode(SmartphoneCpu cpu)
         {
             Text = $"Editing cpu with id: {cpu.Id}";
-            TitleLabel.Text = "Edit Cpu";
+            TitleLabel.Text = TitleLabel.Text.Replace("Add", "Edit");
             NameTextBox.Text = cpu.Name;
             CoreCountNumericUpDown.Value = cpu.CoreCount;
             ClockSpeedNumericUpDown.Value = cpu.ClockSpeed_MHz;
