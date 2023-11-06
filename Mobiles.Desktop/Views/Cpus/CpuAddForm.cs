@@ -1,13 +1,15 @@
-﻿namespace Mobiles.Desktop.Views.Cpus
+﻿using Mobiles.Core.Models;
+
+namespace Mobiles.Desktop.Views.Cpus
 {
     public partial class CpuAddForm : Form
     {
-        private readonly int? EditId;
+        private readonly int? _editId;
         public SmartphoneCpu? Cpu { get; private set; }
 
         public CpuAddForm(SmartphoneCpu? cpu = null)
         {
-            EditId = cpu?.Id;
+            _editId = cpu?.Id;
             InitializeComponent();
             if (cpu != null)
             {
@@ -29,7 +31,7 @@
         {
             var cpu = new SmartphoneCpu
             {
-                Id = EditId ?? 0,
+                Id = _editId ?? 0,
                 Name = NameTextBox.Text,
                 CoreCount = Convert.ToInt32(CoreCountNumericUpDown.Value),
                 ClockSpeed_MHz = Convert.ToInt32(ClockSpeedNumericUpDown.Value),

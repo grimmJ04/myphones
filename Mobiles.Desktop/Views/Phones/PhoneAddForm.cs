@@ -1,13 +1,15 @@
-﻿namespace Mobiles.Desktop.Views.Phones
+﻿using Mobiles.Core.Models;
+
+namespace Mobiles.Desktop.Views.Phones
 {
     public partial class PhoneAddForm : Form
     {
-        private readonly int? EditId;
+        private readonly int? _editId;
         public Smartphone? Phone { get; private set; }
 
         public PhoneAddForm(Smartphone? phone = null)
         {
-            EditId = phone?.Id;
+            _editId = phone?.Id;
             InitializeComponent();
 
             var priceRangeItems = Enum.GetValues<Price>();
@@ -34,7 +36,7 @@
             PriceRangeComboBox.SelectedItem = phone.PriceRange;
             using var context = Program.GetDbContext();
             int? selection = null;
-            int? cpuId = context.Smartphones.Find(EditId)?.CpuId;
+            int? cpuId = context.Smartphones.Find(_editId)?.CpuId;
             if (cpuId == null)
             {
                 return;
@@ -57,7 +59,7 @@
         {
             var phone = new Smartphone()
             {
-                Id = EditId ?? 0,
+                Id = _editId ?? 0,
                 BatteryPower_mAh = Convert.ToInt32(BatteryPowerNumericUpDown.Value),
                 IsDualSim = IsDualSimCheckBox.Checked,
                 InternalMemory_GB = Convert.ToInt32(InternalMemoryNumericUpDown.Value),

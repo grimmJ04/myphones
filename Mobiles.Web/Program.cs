@@ -49,7 +49,7 @@ finally
 }
 
 string GetConnectionName() => builder?.Configuration.GetSection("AppSettings").GetValue<string>("Connection")
-        ?? throw new KeyNotFoundException($"Application setting 'Connection' not found.");
+        ?? throw new KeyNotFoundException("Application setting 'Connection' not found.");
 
 string GetConnectionString(string? connection = null) => builder?.Configuration.GetConnectionString(GetConnectionName())
         ?? throw new KeyNotFoundException($"Connection string '{connection}' not found.");

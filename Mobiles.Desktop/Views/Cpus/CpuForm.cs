@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mobiles.Core.Data;
+using Mobiles.Core.Models;
 
 namespace Mobiles.Desktop.Views.Cpus
 {
