@@ -3,7 +3,8 @@
 
 @{
     ViewData["Title"] = "Edit";
-    var CpuCollection = ViewData["CpuId"] as SelectList;
+    // Get the value stored under key:`CpuId` in ViewData.
+    var cpuCollection = ViewData["CpuId"] as SelectList;
 }
 
 <h1>Edit</h1>
@@ -38,6 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PriceRange" class="control-label"></label>
+                <!-- Note the select list -->
                 <select asp-for="PriceRange" class="form-control" asp-items="Html.GetEnumSelectList<Price>()">
                     <option>Select ...</option>
                 </select>
@@ -45,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CpuId" class="control-label">Cpu</label>
-                <select asp-for="CpuId" class="form-control" asp-items="CpuCollection">
+                <select asp-for="CpuId" class="form-control" asp-items="cpuCollection">
                     <option>Select ...</option>
                 </select>
                 <span asp-validation-for="CpuId" class="text-danger"></span>

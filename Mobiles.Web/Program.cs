@@ -4,13 +4,16 @@ using Mobiles.Core.Data;
 using Mobiles.Core.Utils;
 using System.Diagnostics;
 
+// Needed only if in-memory db is used. Should be kept alive until the app is closed.
 SqliteConnection? keepAliveConnection = null;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// Optional: Add service for db context dependency injection.
 builder.Services.AddDbContext<PhonesDbContext>((options) =>
 {
+    // See appsettings.*.json
     string connectionStringConfig = GetConnectionString(GetConnectionName());
     connectionStringConfig = PathUtils.ResolveVirtual(connectionStringConfig);
     string connectionString = $"Data Source={connectionStringConfig};";
@@ -38,6 +41,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+// Application "entry point"
 try
 {
     InitDb();
@@ -45,9 +49,11 @@ try
 }
 finally
 {
+    // Making sure that the connection is closed.
     keepAliveConnection?.Dispose();
 }
 
+# region Initialization helpers
 string GetConnectionName() => builder?.Configuration.GetSection("AppSettings").GetValue<string>("Connection")
         ?? throw new KeyNotFoundException($"Application setting 'Connection' not found.");
 
@@ -93,3 +99,4 @@ void InitDb()
     bool created = context.Database.EnsureCreated();
     Debug.WriteLine(created ? "Initialized database." : "Using existing database.");
 }
+# endregion

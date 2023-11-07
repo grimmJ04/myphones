@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobiles.Core", "Mobiles.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobiles.Desktop", "Mobiles.Desktop\Mobiles.Desktop.csproj", "{3A788853-0892-48D3-9363-C3B75BF26AB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobiles.Web", "Mobiles.Web\Mobiles.Web.csproj", "{F1C3C429-0354-43E6-B683-0E6948663FF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobiles.Web", "Mobiles.Web\Mobiles.Web.csproj", "{F1C3C429-0354-43E6-B683-0E6948663FF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A93DA84A-7CD6-450F-904D-DBFFD0ECE160}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
