@@ -146,7 +146,14 @@ namespace Mobiles.Web.Controllers
                 _context.SmartphoneCpus.Remove(smartphoneCpu);
             }
 
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                return Problem($"Delete failed: {e}");
+            }
             return RedirectToAction(nameof(Index));
         }
 

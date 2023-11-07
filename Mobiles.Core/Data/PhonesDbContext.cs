@@ -5,8 +5,8 @@ namespace Mobiles.Core.Data
 {
     public class PhonesDbContext : DbContext
     {
-        public DbSet<Smartphone> Smartphones { get; set; }
-        public DbSet<SmartphoneCpu> SmartphoneCpus { get; set; }
+        public DbSet<Smartphone> Smartphones { get; set; } = null!;
+        public DbSet<SmartphoneCpu> SmartphoneCpus { get; set; } = null!;
 
         public PhonesDbContext() : base() { }
 

@@ -1,4 +1,5 @@
 using Mobiles.Core.Data;
+using Mobiles.Core.Models;
 using Mobiles.Core.Utils;
 using Mobiles.Desktop.Views.Cpus;
 using Mobiles.Desktop.Views.Phones;
@@ -81,7 +82,7 @@ namespace Mobiles.Desktop.Views
                     {
                         try
                         {
-                            context.Add(item);
+                            context.SmartphoneCpus.Add(item);
                             context.SaveChanges();
                         }
                         catch (Exception) { }

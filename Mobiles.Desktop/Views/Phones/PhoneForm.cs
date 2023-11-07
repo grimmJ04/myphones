@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mobiles.Core.Data;
+using Mobiles.Core.Models;
 
 namespace Mobiles.Desktop.Views.Phones
 {
@@ -37,19 +38,19 @@ namespace Mobiles.Desktop.Views.Phones
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            if (PhoneDataGridView.CurrentRow.DataBoundItem is not Smartphone item)
+            if (PhoneDataGridView.CurrentRow?.DataBoundItem is not Smartphone item)
             {
                 MessageBox.Show("Select a row to edit first!", "Empty selection", MessageBoxButtons.OK);
                 return;
             }
             using PhoneAddForm form = new(item);
             var dialogResult = form.ShowDialog();
-            if (dialogResult == DialogResult.OK && form.Phone != null && _context.Smartphones.Find(item.Id) is Smartphone dbItem)
-            {
-                _context.Smartphones.Entry(dbItem).CurrentValues.SetValues(form.Phone);
-                _context.SaveChangesAsync();
-                _bindingSource.ResetBindings(false);
-            }
+            if (dialogResult != DialogResult.OK || form.Phone == null ||
+                _context.Smartphones.Find(item.Id) is not Smartphone dbItem) return;
+            
+            _context.Smartphones.Entry(dbItem).CurrentValues.SetValues(form.Phone);
+            _context.SaveChangesAsync();
+            _bindingSource.ResetBindings(false);
         }
     }
 }
