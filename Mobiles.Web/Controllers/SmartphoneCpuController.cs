@@ -9,6 +9,7 @@ namespace Mobiles.Web.Controllers
     {
         private readonly PhonesDbContext _context;
 
+        // Dependency injection via (Program.cs :: builder.Services.AddDbContext<PhonesDbContext>)
         public SmartphoneCpuController(PhonesDbContext context)
         {
             _context = context;

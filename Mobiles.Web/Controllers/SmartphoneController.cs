@@ -10,6 +10,7 @@ namespace Mobiles.Web.Controllers
     {
         private readonly PhonesDbContext _context;
 
+        // Dependency injection via (Program.cs :: builder.Services.AddDbContext<PhonesDbContext>)
         public SmartphoneController(PhonesDbContext context)
         {
             _context = context;
@@ -44,6 +45,7 @@ namespace Mobiles.Web.Controllers
         // GET: Smartphone/Create
         public IActionResult Create()
         {
+            // Additional data to be used in corresponding view file.
             ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null);
             return View();
         }
@@ -61,6 +63,7 @@ namespace Mobiles.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            // Additional data to be used in corresponding view file.
             ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null, smartphone.CpuId);
             return View(smartphone);
         }
@@ -78,6 +81,7 @@ namespace Mobiles.Web.Controllers
             {
                 return NotFound();
             }
+            // Additional data to be used in corresponding view file.
             ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null, smartphone.CpuId);
             return View(smartphone);
         }
@@ -114,6 +118,7 @@ namespace Mobiles.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            // Additional data to be used in corresponding view file.
             ViewData["CpuId"] = new SelectList(_context.SmartphoneCpus, "Id", null, smartphone.CpuId);
             return View(smartphone);
         }
