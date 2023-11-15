@@ -47,7 +47,7 @@ namespace Mobiles.Desktop.Views.Phones
             var dialogResult = form.ShowDialog();
             if (dialogResult != DialogResult.OK || form.Phone == null ||
                 _context.Smartphones.Find(item.Id) is not Smartphone dbItem) return;
-            
+
             _context.Smartphones.Entry(dbItem).CurrentValues.SetValues(form.Phone);
             _context.SaveChangesAsync();
             _bindingSource.ResetBindings(false);
